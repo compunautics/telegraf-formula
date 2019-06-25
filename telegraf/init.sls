@@ -22,19 +22,23 @@ telegraf_conf:
     - group: telegraf
     - mode: 0640
     
-telegraf_dir:
-  file.directory:
-    - name: /etc/telegraf
-    - user: telegraf
-    - group: telegraf
-    - mode: 0750
-
 telegraf_checks_dir:
   file.directory:
     - name: /etc/telegraf/telegraf.d/checks
     - user: telegraf
     - group: telegraf
     - mode: 0700
+    - makedirs: True
+    
+telegraf_dir:
+  file.directory:
+    - name: /etc/telegraf
+    - user: telegraf
+    - group: telegraf
+    - mode: 0750
+    - recurse:
+      - user
+      - group
 
 telegraf_service:
   service.running:
