@@ -18,6 +18,23 @@ telegraf_conf:
     - name: /etc/telegraf/telegraf.conf
     - source: salt://telegraf/templates/telegraf.conf
     - template: jinja
+    - user: telegraf
+    - group: telegraf
+    - mode: 0640
+    
+telegraf_dir:
+  file.directory:
+    - name: /etc/telegraf
+    - user: telegraf
+    - group: telegraf
+    - mode: 0750
+
+telegraf_checks_dir:
+  file.directory:
+    - name: /etc/telegraf/telegraf.d/checks
+    - user: telegraf
+    - group: telegraf
+    - mode: 0700
 
 telegraf_service:
   service.running:
